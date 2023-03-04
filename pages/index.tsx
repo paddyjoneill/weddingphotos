@@ -28,7 +28,12 @@ function Home() {
             <div className="flex flex-col m-8">
                 <h1 className="text-center font-semibold text-xl">Paddy and Jade&apos;s Wedding Pictures</h1>
                 <img className="max-w-full" src="/holyisle.webp" alt="Holy Isle" />
-                <input className="border mb-4 p-2" placeholder="password" type="password" onChange={onChange} />
+                <input
+                    className="border mb-4 p-2 placeholder:text-center"
+                    placeholder="password"
+                    type="password"
+                    onChange={onChange}
+                />
                 <button className="border p-2 rounded-md" onClick={onClick}>
                     Login
                 </button>
