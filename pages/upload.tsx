@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useLoggedInContext } from '@/components/contexts/LoggedInContext';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Upload = () => {
     const { logOut, loggedIn } = useLoggedInContext();
@@ -61,7 +62,10 @@ const Upload = () => {
 
     return (
         <main className="w-full h-full">
-            <div className="w-full flex justify-end p-4">
+            <div className="w-full flex justify-between p-4">
+                <Link href={'/gallery'} className="border p-2 rounded-md">
+                    Gallery
+                </Link>
                 <button className="border p-2 rounded-md" onClick={logoutClick}>
                     Logout
                 </button>
