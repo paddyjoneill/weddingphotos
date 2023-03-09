@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useLoggedInContext } from '@/components/contexts/LoggedInContext';
 import { useRouter } from 'next/router';
+import { ListObjectsCommand, S3Client } from '@aws-sdk/client-s3';
 
 interface Props {
     files: string[];
@@ -43,20 +44,20 @@ const Gallery = (props: Props) => {
 
 export default Gallery;
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const baseUrl = process.env.BUCKET_URL;
 
-    const currentUrl = process.env.URL;
+    const s3 = new S3Client({});
 
-    const response = await fetch(currentUrl + '/api/get_all_files');
+    const bucket = process.env.RESIZED_BUCKET_NAME as string;
 
-    const fileNames: { files: string[] } = await response.json();
-
-    const files = fileNames.files ? fileNames.files.map((file) => baseUrl + file) : [];
+    const locommand = new ListObjectsCommand({ Bucket: bucket });
+    const response = await s3.send(locommand);
+    const files = response.Contents?.map((obj) => baseUrl! + obj.Key);
 
     return {
         props: {
-            files,
+            files: files ?? [],
         },
     };
 };
