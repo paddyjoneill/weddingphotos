@@ -70,7 +70,7 @@ const Upload = () => {
                     Logout
                 </button>
             </div>
-            <div className="w-full flex flex-col items-center">
+            <div className="w-full h-full flex flex-col items-center justify-center">
                 <h1 className="mb-8">Upload Wedding Pictures</h1>
                 <input
                     className="mb-8 border file:border file:p-2 file:rounded-md file:border-gray-200 file:bg-white w-80 rounded-md file:mr-4"
