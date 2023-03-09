@@ -1,4 +1,5 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useContext } from 'react';
+import { useLocalStorage } from '@/components/hooks/useLocalStorage';
 
 interface LoggedInContextValue {
     loggedIn: boolean;
@@ -14,7 +15,7 @@ interface Props {
     children: ReactNode;
 }
 const LoggedInContextProvider = ({ children }: Props) => {
-    const [loggedIn, setLoggedIn] = useState<boolean>(false);
+    const [loggedIn, setLoggedIn] = useLocalStorage<boolean>('loggedIn', false);
 
     const logOut = () => setLoggedIn(false);
 
