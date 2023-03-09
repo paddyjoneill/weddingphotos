@@ -28,7 +28,7 @@ const Gallery = (props: Props) => {
                 <button className="border p-2 rounded-md" onClick={logoutClick}>
                     Logout
                 </button>
-            </div>{' '}
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3">
                 {props.files.map((file) => {
                     return (

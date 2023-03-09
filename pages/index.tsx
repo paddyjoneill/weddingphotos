@@ -11,7 +11,7 @@ function Home() {
 
     useEffect(() => {
         if (loggedIn) {
-            router.push('/upload');
+            router.push('/gallery');
         }
     }, [loggedIn, router]);
 
