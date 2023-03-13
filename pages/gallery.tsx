@@ -29,10 +29,10 @@ const Gallery = (props: Props) => {
                     Logout
                 </button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            <div className="columns-1 sm:columns-2 md:columns-3 gap-4 p-4">
                 {props.files.map((file) => {
                     return (
-                        <div key={file} className="m-4">
+                        <div key={file} className="mb-4">
                             <img src={file} alt="picture" />
                         </div>
                     );
