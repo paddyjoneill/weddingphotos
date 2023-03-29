@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useLoggedInContext } from '@/components/contexts/LoggedInContext';
@@ -18,7 +18,23 @@ const Gallery = (props: Props) => {
             router.push('/');
         }
     }, [loggedIn, router]);
+
+    const picturesPerPage = 18;
+    const noOfPages = props.files.length / picturesPerPage;
+
+    const [currentPage, setCurrentPage] = useState<number>(1);
+
+    const previousPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+    const nextPage = () => {
+        if (currentPage < noOfPages) setCurrentPage(currentPage + 1);
+    };
+
     const logoutClick = () => logOut();
+
+    const files = props.files.slice((currentPage - 1) * picturesPerPage, currentPage * picturesPerPage);
+
     return (
         <main>
             <div className="w-full flex justify-between p-4">
@@ -30,7 +46,7 @@ const Gallery = (props: Props) => {
                 </button>
             </div>
             <div className="columns-1 sm:columns-2 md:columns-3 gap-4 p-4">
-                {props.files.map((file) => {
+                {files.map((file) => {
                     return (
                         <div key={file} className="mb-4">
                             <img src={file} alt="picture" />
@@ -38,6 +54,17 @@ const Gallery = (props: Props) => {
                     );
                 })}
             </div>
+            {noOfPages > 1 ? (
+                <div className="w-full flex justify-center items-center">
+                    <button className="border p-2 rounded-md mx-4" onClick={previousPage}>
+                        Previous Page
+                    </button>
+                    <p className="">Current Page: {currentPage}</p>
+                    <button className="border p-2 rounded-md mx-4" onClick={nextPage}>
+                        Next Page
+                    </button>
+                </div>
+            ) : null}
         </main>
     );
 };
